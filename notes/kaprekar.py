@@ -20,5 +20,6 @@
 # 
 # Algorithm implemented by Kwangju Kim
 
-def bar(x):
+# Find the n'th sequence of Kaprekan numbers
+def find_X(n):
   pass
