@@ -14,16 +14,40 @@
 import sys
 
 def get_k_const(num):
-  if (num / 10000 != 0):
+  if (num > 10000):
     raise Exception('Must be 4-digit number')
-  pass
+  if (num < 1 and num > -1):
+    raise Exception('Not a kaprekar const')
+  if (num > 6173 and num < 6175):
+    return 0
+  return 1 + get_k_const(int_to_descd(num) - int_to_ascnd(num));
+
+def int_split(num):
+  numlist = []
+  for i in str(num):
+    numlist.append(int(i))
+  return numlist
+
+def int_merge(numlist):
+  num = 0
+  for i in numlist:
+    num = num * 10
+    num = num + i
+  return num
 
 def int_to_ascnd(num):
-  pass
+  numlist = int_split(num)
+  numlist.sort()
+  return int_merge(numlist)
 
 def int_to_descd(num):
-  pass
+  numlist = int_split(int_to_ascnd(num))
+  numlist.reverse()
+  return int_merge(numlist)
 
 numlist = [3524, 2111, 9831, 4371, 1111, 4787, 6174, 5085, 9411]
 
-h = get_k_const(400);
+print get_k_const(3524);
+
+for i in numlist:
+  print "The number %d will iterate %d times to get to 6174." % numlist[i], get_k_const(numlist[i])
